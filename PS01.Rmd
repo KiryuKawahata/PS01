@@ -31,10 +31,22 @@ View(train)
 View(test)
 View(submission)
 
-test %>% 
-  left_join(submission, by="PassengerId") %>% 
-  select(PassengerId, Sex, Survived) %>%
-  group_by(Sex)
+str(test)
+
+#Creates a data frame with survived being predicted as those with Class 1 tickets.
+
+Class_test <- test
+  Class_test$Survived <- 0
+  Class_test$Survived[test$Pclass == 1] <- 1 
+Class_frame <- data.frame(Class_test)
+
+#Dataframe using only the two required columns for submission
+Class_csv <- test%>% 
+  left_join(Class_frame, by="PassengerId") %>% 
+  select(PassengerId, Survived)
+
+#Generates csv file for submission 
+write.csv(Class_csv, file = "Classsubmission.csv", row.names = FALSE, na="")
 ```
 
 
