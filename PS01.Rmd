@@ -31,7 +31,6 @@ View(train)
 View(test)
 View(submission)
 
-str(test)
 
 #Creates a data frame with survived being predicted as those with Class 1 tickets.
 
@@ -46,7 +45,7 @@ Class_csv <- test%>%
   select(PassengerId, Survived)
 
 #Generates csv file for submission 
-write.csv(Class_csv, file = "Classsubmission.csv", row.names = FALSE, na="")
+write.csv(Class_csv, file = "submission.csv", row.names = FALSE, na="")
 ```
 
 
